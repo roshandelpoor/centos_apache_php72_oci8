@@ -1,0 +1,21 @@
+#  sudo docker-compose up --build
+#  sudo docker-compose up --build -d
+#OR
+#  sudo docker-compose down
+#  sudo docker-compose up
+
+version: '3'
+
+services:
+  web:
+    container_name: centos_php72_apache_oci8_full
+    build:
+      context: ./docker
+    ports:
+        - 9010:80
+    volumes:
+      - ./:/var/www/html/
+      #- ./docker/conf/apache:/etc/apache2/sites-enabled/
+      #- ./docker/conf/php:/etc/php.d
+    tty: true
+

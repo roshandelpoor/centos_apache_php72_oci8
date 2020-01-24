@@ -153,7 +153,32 @@ RUN echo "export TNS_ADMIN" >> /root/.bash_profile
 
 
 ##############################################
-# apache configurations, mod rewrite
+# phantomJS install
+##############################################
+RUN yum install -y glibc fontconfig freetype freetype-devel fontconfig-devel wget bzip2
+
+ADD phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/
+#RUN tar xvjf /tmp/phantomjs-2.1.1-linux-x86_64.tar.bz2
+RUN mv /tmp/phantomjs-2.1.1-linux-x86_64 /usr/local/share/
+RUN ln -sf /usr/local/share/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
+RUN phantomjs --version
+
+
+##############################################
+# wkhtmltopdf install
+##############################################
+RUN yum install -y libpng libjpeg openssl icu libX11 libXext libXrender xorg-x11-fonts-Type1 xorg-x11-fonts-75dpi
+
+ADD wkhtmltoxpdf/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz /tmp/
+#RUN tar -xvf /tmp/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+RUN mv /tmp/wkhtmltox/bin/wkhtmltopdf /usr/bin/wkhtmltopdf
+RUN mv /tmp/wkhtmltox/bin/wkhtmltoimage /usr/bin/wkhtmltoimage
+RUN wkhtmltopdf -V
+RUN wkhtmltopdf https://google.com output_pdf_file_name.pdf
+
+
+##############################################
+# apache enable mod rewrite
 ##############################################
 #RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
 

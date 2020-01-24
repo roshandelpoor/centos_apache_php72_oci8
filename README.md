@@ -1,11 +1,29 @@
 # centos_apache_php72_oci8
 
-Dockerfile Docker-Compose CentOS7 Apache/2.4.6(httpd) PHP/7.2.27 oci8 swoole soap phantomJS mpm-event FPM/FastCGI
+Dockerfile Docker-Compose CentOS7 Apache/2.4.6(httpd) PHP/7.2.27 oci8 swoole soap phantomJS mpm-event FPM/FastCGI wkhtmltopdf wkhtmltoimage
 
 
 # Enable PHP Extentions
 
 etc/php.d/15-xdebug.ini, /etc/php.d/20-bz2.ini, /etc/php.d/20-calendar.ini, /etc/php.d/20-ctype.ini, /etc/php.d/20-curl.ini, /etc/php.d/20-dom.ini, /etc/php.d/20-exif.ini, /etc/php.d/20-fileinfo.ini, /etc/php.d/20-ftp.ini, /etc/php.d/20-gd.ini, /etc/php.d/20-gettext.ini, /etc/php.d/20-iconv.ini, /etc/php.d/20-json.ini, /etc/php.d/20-mbstring.ini, /etc/php.d/20-mysqlnd.ini, /etc/php.d/20-oci8.ini, /etc/php.d/20-pdo.ini, /etc/php.d/20-phar.ini, /etc/php.d/20-posix.ini, /etc/php.d/20-shmop.ini, /etc/php.d/20-simplexml.ini, /etc/php.d/20-soap.ini, /etc/php.d/20-sockets.ini, /etc/php.d/20-sqlite3.ini, /etc/php.d/20-sysvmsg.ini, /etc/php.d/20-sysvsem.ini, /etc/php.d/20-sysvshm.ini, /etc/php.d/20-tokenizer.ini, /etc/php.d/20-xml.ini, /etc/php.d/20-xmlwriter.ini, /etc/php.d/20-xsl.ini, /etc/php.d/30-mcrypt.ini, /etc/php.d/30-mysqli.ini, /etc/php.d/30-pdo_mysql.ini, /etc/php.d/30-pdo_oci.ini, /etc/php.d/30-pdo_sqlite.ini, /etc/php.d/30-wddx.ini, /etc/php.d/30-xmlreader.ini, /etc/php.d/30-xmlrpc.ini, /etc/php.d/40-zip.ini, /etc/php.d/swoole.ini
+
+
+# dynamic config php.ini
+
+- disable_functions =
+- max_execution_time = 600
+- memory_limit = 2048M
+- post_max_size = 80M
+- file_uploads = On
+- upload_max_filesize = 100M
+- max_file_uploads = 50
+- session.name = PHPSESSID
+- session.gc_maxlifetime = 1440
+- session.cache_expire = 180
+- html_errors = On
+- display_errors = On
+- display_startup_errors = On
+- error_reporting = E_ALL
 
 
 # Oracle instantclient 19.5

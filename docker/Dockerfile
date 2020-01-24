@@ -16,12 +16,25 @@ RUN yum install -y curl nano nodejs wget htop git yum-utils
 
 
 ##############################################
-# Httpd Install
+# apache(Httpd) Install
 ##############################################
 RUN yum install -y httpd
 RUN yum install -y firewalld
-###RUN firewall-cmd --permanent --add-port=80/tcp
-###RUN firewall-cmd --permanent --add-port=443/tcp
+##RUN firewall-cmd --permanent --add-port=80/tcp
+##RUN firewall-cmd --permanent --add-port=443/tcp
+##RUN firewall-cmd --reload
+## or
+##RUN systemctl restart firewalld.service
+
+##RUN httpd -v
+## config virtual apache --> /etc/apache2/sites-enabled/000-default.conf
+## config httpd  --> /etc/httpd/conf/httpd.conf
+## config enable .htaccess  --> /etc/httpd/conf/httpd.conf
+## config hide os_version and php_version
+## config add custom header
+## config virtualhost
+## config mpm_event
+## config FPM/FastCGI
 
 
 ##############################################
@@ -38,6 +51,9 @@ RUN yum install -y haveged
 ##RUN systemctl start tomcat.service
 ##RUN firewall-cmd --zone=public --permanent --add-port=8080/tcp
 ##RUN firewall-cmd --reload
+## or
+##RUN systemctl restart firewalld.service
+##RUN tomcat --version
 
 
 ##############################################
@@ -46,6 +62,10 @@ RUN yum install -y haveged
 RUN yum --enablerepo=remi-php72 install -y php
 
 RUN yum --enablerepo=remi-php72 install -y php-xml php-soap php-pdo php-mysql php-pdo_oci php-xmlrpc php-mbstring php-json php-gd php-mcrypt php-oci php-fpm php-zip php-xdebug php-pear php-devel
+
+##RUN php -v
+## php.ini   --> /etc/php.ini
+## extra ini --> /etc/php.d/{filename.ini}
 
 
 ##############################################
@@ -174,13 +194,16 @@ ADD wkhtmltoxpdf/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz /tmp/
 RUN mv /tmp/wkhtmltox/bin/wkhtmltopdf /usr/bin/wkhtmltopdf
 RUN mv /tmp/wkhtmltox/bin/wkhtmltoimage /usr/bin/wkhtmltoimage
 RUN wkhtmltopdf -V
-RUN wkhtmltopdf https://google.com output_pdf_file_name.pdf
+RUN wkhtmltoimage -V
+RUN wkhtmltopdf https://google.com /tmp/output_pdf_file_name.pdf
+RUN wkhtmltoimage https://google.com /tmp/output_image_file_name.jpg
 
 
 ##############################################
 # apache enable mod rewrite
 ##############################################
 #RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
+RUN echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/httpd/conf.modules.d/00-base.conf
 
 
 ##############################################

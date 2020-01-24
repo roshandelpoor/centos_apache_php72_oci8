@@ -16,6 +16,15 @@ services:
     volumes:
       - ./:/var/www/html/
       #- ./docker/conf/apache:/etc/apache2/sites-enabled/
-      #- ./docker/conf/php:/etc/php.d
+      #- ./docker/conf/apache:/etc/httpd/conf/
+      - ./docker/conf/php:/etc/php.d/
     tty: true
+
+
+
+
+
+
+
+
 

@@ -14,10 +14,24 @@ services:
     ports:
         - 9010:80
     volumes:
-      - ./:/var/www/html/
+      # PHP CODE VOLUMES
+      - ./PHP Project/:/var/www/html/
+
+      # TOMCAT DYNAMIC CONFIG
+      - ./Tomcat Project/:/var/lib/tomcat/webapps/
+      # OR
+      #- ./Tomcat Project/:/opt/tomcat/webapps/
+
+      # php.ini DYNAMIC CONFIG
+      - ./docker/conf/php:/etc/php.d/
+
+      # APACHE DYNAMIC CONFIG
       #- ./docker/conf/apache:/etc/apache2/sites-enabled/
       #- ./docker/conf/apache:/etc/httpd/conf/
-      - ./docker/conf/php:/etc/php.d/
+
+      # TOMCAT DYNAMIC CONFIG
+      #- ./docker/conf/apache:/etc/httpd/conf/
+
     tty: true
 
 

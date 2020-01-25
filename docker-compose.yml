@@ -10,27 +10,27 @@ services:
   web:
     container_name: centos_php72_apache_oci8_full
     build:
-      context: ./docker
+      context: ./Image_Repository
     ports:
         - 9010:80
     volumes:
-      # PHP CODE VOLUMES
+      # CODE - PHP CODE VOLUMES
       - ./PHP Project/:/var/www/html/
 
-      # TOMCAT DYNAMIC CONFIG
+      # CODE - TOMCAT DYNAMIC CONFIG
       - ./Tomcat Project/:/var/lib/tomcat/webapps/
       # OR
       #- ./Tomcat Project/:/opt/tomcat/webapps/
 
-      # php.ini DYNAMIC CONFIG
-      - ./docker/conf/php:/etc/php.d/
+      # CONFIG - php.ini DYNAMIC CONFIG
+      - ./Image_Repository/conf/php:/etc/php.d/
 
-      # APACHE DYNAMIC CONFIG
-      #- ./docker/conf/apache:/etc/apache2/sites-enabled/
-      #- ./docker/conf/apache:/etc/httpd/conf/
+      # CONFIG - APACHE DYNAMIC CONFIG
+      #- ./Image_Repository/conf/apache:/etc/apache2/sites-enabled/
+      #- ./Image_Repository/conf/apache:/etc/httpd/conf/
 
-      # TOMCAT DYNAMIC CONFIG
-      #- ./docker/conf/apache:/etc/httpd/conf/
+      # CONFIG - TOMCAT DYNAMIC CONFIG
+      #- ./Image_Repository/conf/apache:/etc/httpd/conf/
 
     tty: true
 

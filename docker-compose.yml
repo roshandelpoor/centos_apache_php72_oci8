@@ -17,19 +17,23 @@ services:
       # CODE - PHP CODE VOLUMES
       - ./PHP Project/:/var/www/html/
 
+
       # CODE - TOMCAT DYNAMIC CONFIG
       - ./Tomcat Project/:/var/lib/tomcat/webapps/
       # OR
       #- ./Tomcat Project/:/opt/tomcat/webapps/
 
+
       # CONFIG - php.ini DYNAMIC CONFIG
       - ./Image_Repository/conf/php:/etc/php.d/
 
-      # CONFIG - APACHE DYNAMIC CONFIG
-      #- ./Image_Repository/conf/apache:/etc/apache2/sites-enabled/
-      #- ./Image_Repository/conf/apache:/etc/httpd/conf/
 
       # CONFIG - TOMCAT DYNAMIC CONFIG
+      #- ./Image_Repository/conf/apache:/etc/httpd/conf/
+
+
+      # CONFIG - APACHE DYNAMIC CONFIG
+      #- ./Image_Repository/conf/apache:/etc/apache2/sites-enabled/
       #- ./Image_Repository/conf/apache:/etc/httpd/conf/
 
     tty: true

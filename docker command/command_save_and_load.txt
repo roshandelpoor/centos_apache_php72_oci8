@@ -1,0 +1,26 @@
+
+sudo docker images
+
+
+
+
+sudo docker save -o /home/matrix/matrix-data.tar matrix-data
+
+
+sudo docker load -i <path to copied image file
+
+
+
+
+Remove all stopped containers.
+
+docker rm $(docker ps -a -q)
+
+
+
+
+Remove all untagged images
+
+docker rmi $(docker images -q) -f
+
+

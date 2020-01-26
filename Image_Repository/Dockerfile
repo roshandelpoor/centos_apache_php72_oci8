@@ -200,6 +200,13 @@ RUN wkhtmltoimage https://google.com /tmp/output_image_file_name.jpg
 
 
 ##############################################
+# find(locate) file
+##############################################
+RUN yum install -y mlocate
+RUN updatedb
+
+
+##############################################
 # apache enable mod rewrite
 ##############################################
 #RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
@@ -210,9 +217,12 @@ RUN echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/httpd/conf.m
 # apache enable FPM/FastCGI
 ##############################################
 RUN yum install -y mod_ssl
+
 COPY conf/apache/mpm-mod/00-mpm.conf /etc/httpd/conf.modules.d/00-mpm.conf
 COPY conf/apache/FPM_FastCGI/fpm_config/php.conf /etc/httpd/conf.d/php.conf
 COPY conf/apache/FPM_FastCGI/www_conf/www.conf /etc/php-fpm.d/www.conf
+
+COPY supervisord/supervisord.conf /etc/supervisord.conf
 
 
 ##############################################
@@ -231,8 +241,8 @@ WORKDIR /var/www/html
 # CMD
 ##############################################
 CMD ["/usr/bin/tomcat start","-D","FOREGROUND"]
+CMD ["/usr/bin/supervisord", "-n"]
 CMD ["httpd","-D","FOREGROUND"]
-
 
 ##############################################
 # Expose

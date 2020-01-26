@@ -25,7 +25,7 @@ services:
 
 
       # CONFIG - php.ini DYNAMIC CONFIG
-      - ./Image_Repository/conf/php:/etc/php.d/
+      #- ./Image_Repository/conf/php:/etc/php.d/
 
 
       # CONFIG - TOMCAT DYNAMIC CONFIG

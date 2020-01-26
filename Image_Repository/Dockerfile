@@ -223,6 +223,7 @@ COPY conf/apache/FPM_FastCGI/fpm_config/php.conf /etc/httpd/conf.d/php.conf
 COPY conf/apache/FPM_FastCGI/www_conf/www.conf /etc/php-fpm.d/www.conf
 
 COPY supervisord/supervisord.conf /etc/supervisord.conf
+COPY ["start.sh", "/root/start.sh"]
 
 
 ##############################################
@@ -241,7 +242,10 @@ WORKDIR /var/www/html
 # CMD
 ##############################################
 CMD ["/usr/bin/tomcat start","-D","FOREGROUND"]
+
+CMD ["/root/start.sh"]
 CMD ["/usr/bin/supervisord", "-n"]
+
 CMD ["httpd","-D","FOREGROUND"]
 
 ##############################################

@@ -254,15 +254,12 @@ WORKDIR /var/www/html
 ##############################################
 # CMD
 ##############################################
-CMD ["/usr/sbin/tomcat start","-D","FOREGROUND"]
-
 #CMD ["/root/start.sh"]
-#CMD ["/usr/sbin/php-fpm start","-D","FOREGROUND"]
+#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+SHELL [ "/usr/bin/supervisord" ]
 
-#CMD ["/usr/bin/supervisord", "-n"]
-CMD ["/usr/bin/supervisorctl start all", "-n"]
-
-CMD ["httpd","-D","FOREGROUND"]
+#CMD ["/usr/sbin/tomcat start","-D","FOREGROUND"]
+CMD ["httpd", "-D", "FOREGROUND"]
 
 
 ##############################################

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-/usr/sbin/service php-fpm start
+/usr/sbin/php-fpm -c /etc/php-fpm.d
 
 #tail -f /dev/null

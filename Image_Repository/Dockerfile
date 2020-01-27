@@ -241,7 +241,7 @@ COPY conf/apache/FPM_FastCGI/www_conf/www.conf /etc/php-fpm.d/www.conf
 COPY conf/apache/config_httpd_and_enable_htaccess/httpd.conf /etc/httpd/conf/httpd.conf
 
 # CONFIG - SUPERVISOR DYNAMIC
-#COPY ["start.sh", "/root/start.sh"]
+COPY bootstrap /
 COPY supervisord/supervisord.conf /etc/supervisord.conf
 
 # SUPERVISOR - laravel-queue.ini
@@ -258,10 +258,12 @@ WORKDIR /var/www/html
 # CMD
 ##############################################
 #CMD ["/root/start.sh"]
-#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
-SHELL [ "/usr/bin/supervisord" ]
+#CMD [ "/usr/bin/supervisord -c /etc/supervisord.conf" ]
+#CMD [ "/usr/bin/supervisorctl start all" ]
+#SHELL [ "/usr/bin/supervisord", "-c", "/etc/supervisord.conf", "rh-python36" ]
+#SHELL [ "/usr/bin/supervisorctl", "start", "all", "rh-python36" ]
+ENTRYPOINT ["/bootstrap.sh"]
 
-#CMD ["/usr/sbin/tomcat start","-D","FOREGROUND"]
 CMD ["httpd", "-D", "FOREGROUND"]
 
 

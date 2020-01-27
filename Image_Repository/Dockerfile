@@ -224,14 +224,15 @@ RUN yum install -y mod_ssl
 
 #COPY etc/resolv.conf /etc/resolv.conf
 
-#COPY conf/apache/mpm-mod/00-mpm.conf /etc/httpd/conf.modules.d/00-mpm.conf
-#COPY conf/apache/FPM_FastCGI/fpm_config/php.conf /etc/httpd/conf.d/php.conf
-#COPY conf/apache/FPM_FastCGI/www_conf/www.conf /etc/php-fpm.d/www.conf
+RUN mkdir /run/php-fpm
+COPY conf/apache/mpm-mod/00-mpm.conf /etc/httpd/conf.modules.d/00-mpm.conf
+COPY conf/apache/FPM_FastCGI/fpm_config/php.conf /etc/httpd/conf.d/php.conf
+COPY conf/apache/FPM_FastCGI/www_conf/www.conf /etc/php-fpm.d/www.conf
 
 COPY conf/apache/config_httpd_and_enable_htaccess/httpd.conf /etc/httpd/conf/httpd.conf
 
-#COPY supervisord/supervisord.conf /etc/supervisord.conf
 #COPY ["start.sh", "/root/start.sh"]
+COPY supervisord/supervisord.conf /etc/supervisord.conf
 
 
 ##############################################
@@ -246,11 +247,13 @@ WORKDIR /var/www/html
 CMD ["/usr/sbin/tomcat start","-D","FOREGROUND"]
 
 #CMD ["/root/start.sh"]
-CMD ["/usr/sbin/php-fpm start","-D","FOREGROUND"]
+#CMD ["/usr/sbin/php-fpm start","-D","FOREGROUND"]
 
 #CMD ["/usr/bin/supervisord", "-n"]
+CMD ["/usr/bin/supervisorctl start all", "-n"]
 
 CMD ["httpd","-D","FOREGROUND"]
+
 
 ##############################################
 # Expose

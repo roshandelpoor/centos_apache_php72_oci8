@@ -209,8 +209,10 @@ RUN updatedb
 ##############################################
 # apache enable mod rewrite
 ##############################################
+# apache
 #RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
-RUN echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/httpd/conf.modules.d/00-base.conf
+# centos
+#RUN echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/httpd/conf.modules.d/00-base.conf
 
 
 ##############################################
@@ -218,24 +220,22 @@ RUN echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/httpd/conf.m
 ##############################################
 RUN yum install -y mod_ssl
 
-COPY conf/apache/mpm-mod/00-mpm.conf /etc/httpd/conf.modules.d/00-mpm.conf
-COPY conf/apache/FPM_FastCGI/fpm_config/php.conf /etc/httpd/conf.d/php.conf
-COPY conf/apache/FPM_FastCGI/www_conf/www.conf /etc/php-fpm.d/www.conf
+#COPY etc/resolv.conf /etc/resolv.conf
 
-COPY supervisord/supervisord.conf /etc/supervisord.conf
-COPY ["start.sh", "/root/start.sh"]
+#COPY conf/apache/mpm-mod/00-mpm.conf /etc/httpd/conf.modules.d/00-mpm.conf
+#COPY conf/apache/FPM_FastCGI/fpm_config/php.conf /etc/httpd/conf.d/php.conf
+#COPY conf/apache/FPM_FastCGI/www_conf/www.conf /etc/php-fpm.d/www.conf
+
+COPY conf/apache/config_httpd/httpd.conf /etc/httpd/conf/httpd.conf
+
+#COPY supervisord/supervisord.conf /etc/supervisord.conf
+#COPY ["start.sh", "/root/start.sh"]
 
 
 ##############################################
 # Directory
 ##############################################
 WORKDIR /var/www/html
-
-
-##############################################
-# COPY
-##############################################
-#COPY etc/resolv.conf /etc/resolv.conf
 
 
 ##############################################

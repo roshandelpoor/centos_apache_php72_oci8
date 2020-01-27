@@ -61,7 +61,7 @@ RUN yum install -y haveged
 ##############################################
 RUN yum --enablerepo=remi-php72 install -y php
 
-RUN yum --enablerepo=remi-php72 install -y php-xml php-soap php-pdo php-mysql php-pdo_oci php-xmlrpc php-mbstring php-json php-gd php-mcrypt php-oci php-fpm php-zip php-xdebug php-pear php-devel
+RUN yum --enablerepo=remi-php72 install -y php-xml php-soap php-pdo php-mysql php-pdo_oci php-xmlrpc php-mbstring php-json php-gd php-mcrypt php-oci php-fpm php-zip php-xdebug php-pear php-devel 
 
 ##RUN php -v
 ## php.ini   --> /etc/php.ini

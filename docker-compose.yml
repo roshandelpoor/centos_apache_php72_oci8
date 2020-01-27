@@ -12,7 +12,8 @@ services:
     build:
       context: ./Image_Repository
     ports:
-        - 9010:80
+      - 9020:80    #apache
+      - 9080:8080  #tomcat
     volumes:
       # CODE - PHP CODE VOLUMES
       - ./PHP Project/:/var/www/html/

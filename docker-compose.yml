@@ -24,6 +24,9 @@ services:
       # OR
       #- ./Tomcat Project/:/opt/tomcat/webapps/
 
+      # SUPERVISOR - laravel-queue.ini
+      - Image_Repository/supervisord/ini/:/etc/supervisord.conf/
+
     tty: true
 
 

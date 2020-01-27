@@ -228,7 +228,7 @@ RUN yum install -y mod_ssl
 #COPY conf/apache/FPM_FastCGI/fpm_config/php.conf /etc/httpd/conf.d/php.conf
 #COPY conf/apache/FPM_FastCGI/www_conf/www.conf /etc/php-fpm.d/www.conf
 
-COPY conf/apache/config_httpd/httpd.conf /etc/httpd/conf/httpd.conf
+COPY conf/apache/config_httpd_and_enable_htaccess/httpd.conf /etc/httpd/conf/httpd.conf
 
 #COPY supervisord/supervisord.conf /etc/supervisord.conf
 #COPY ["start.sh", "/root/start.sh"]

@@ -243,6 +243,7 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 
 ##############################################
 # apache enable mod security
+# for hide name server apache in response
 ##############################################
 RUN yum install -y mod_security
 

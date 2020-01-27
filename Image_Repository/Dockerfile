@@ -244,6 +244,9 @@ COPY conf/apache/config_httpd_and_enable_htaccess/httpd.conf /etc/httpd/conf/htt
 #COPY ["start.sh", "/root/start.sh"]
 COPY supervisord/supervisord.conf /etc/supervisord.conf
 
+# SUPERVISOR - laravel-queue.ini
+COPY supervisord/ini/laravel-queue.ini /etc/supervisord.d/laravel-queue.ini
+
 
 ##############################################
 # Directory

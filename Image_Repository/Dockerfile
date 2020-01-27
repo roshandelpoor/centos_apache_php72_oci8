@@ -242,6 +242,12 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 
 
 ##############################################
+# apache enable mod security
+##############################################
+RUN yum install -y mod_security
+
+
+##############################################
 # apache enable FPM/FastCGI
 ##############################################
 RUN yum install -y mod_ssl

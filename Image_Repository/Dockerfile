@@ -222,15 +222,25 @@ RUN updatedb
 ##############################################
 RUN yum install -y mod_ssl
 
+# CONFIG - DNS DYNAMIC RECORD
 #COPY etc/resolv.conf /etc/resolv.conf
 
+# CONFIG - TOMCAT DYNAMIC CONFIG
+#- ./docker/web/php72/Image_Repository/conf/apache:/etc/httpd/conf/
+
+# CONFIG - php.ini DYNAMIC CONFIG
+COPY conf/php/php.ini /etc/php.ini
+
+# CONFIG - APACHE DYNAMIC MPM And FPM
 RUN mkdir /run/php-fpm
 COPY conf/apache/mpm-mod/00-mpm.conf /etc/httpd/conf.modules.d/00-mpm.conf
 COPY conf/apache/FPM_FastCGI/fpm_config/php.conf /etc/httpd/conf.d/php.conf
 COPY conf/apache/FPM_FastCGI/www_conf/www.conf /etc/php-fpm.d/www.conf
 
+# CONFIG - APACHE DYNAMIC CONFIG
 COPY conf/apache/config_httpd_and_enable_htaccess/httpd.conf /etc/httpd/conf/httpd.conf
 
+# CONFIG - SUPERVISOR DYNAMIC
 #COPY ["start.sh", "/root/start.sh"]
 COPY supervisord/supervisord.conf /etc/supervisord.conf
 

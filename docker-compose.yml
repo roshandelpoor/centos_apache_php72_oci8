@@ -23,19 +23,6 @@ services:
       # OR
       #- ./Tomcat Project/:/opt/tomcat/webapps/
 
-
-      # CONFIG - php.ini DYNAMIC CONFIG
-      #- ./Image_Repository/conf/php:/etc/php.d/
-
-
-      # CONFIG - TOMCAT DYNAMIC CONFIG
-      #- ./Image_Repository/conf/apache:/etc/httpd/conf/
-
-
-      # CONFIG - APACHE DYNAMIC CONFIG
-      #- ./Image_Repository/conf/apache:/etc/apache2/sites-enabled/
-      #- ./Image_Repository/conf/apache:/etc/httpd/conf/
-
     tty: true
 
 

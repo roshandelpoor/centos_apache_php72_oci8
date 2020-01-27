@@ -208,6 +208,8 @@ RUN updatedb
 
 ##############################################
 # apache enable mod rewrite
+# Add "LoadModule rewrite_module modules/mod_rewrite.so" to the configuration file,
+# write "AllowOverride All" for the directory /var/www/html in config apache.
 ##############################################
 # apache
 #RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load

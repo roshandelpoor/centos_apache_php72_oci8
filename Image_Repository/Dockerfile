@@ -254,7 +254,7 @@ RUN yum install -y mod_security
 RUN yum install -y mod_ssl
 
 # CONFIG - DNS DYNAMIC RECORD
-#COPY etc/resolv.conf /etc/resolv.conf
+COPY dns/resolv.conf /etc/resolv.conf
 
 # CONFIG - TOMCAT DYNAMIC CONFIG
 #- ./docker/web/php72/Image_Repository/conf/apache:/etc/httpd/conf/

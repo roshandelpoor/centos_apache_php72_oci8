@@ -27,33 +27,15 @@ RUN yum install -y firewalld
 ##RUN systemctl restart firewalld.service
 
 ##RUN httpd -v
+### config httpd  --> /etc/httpd/conf/httpd.conf
+### config enable .htaccess  --> /etc/httpd/conf/httpd.conf
+### config hide os_version and php_version
+### config add custom header
+### config mpm_event
+### config FPM/FastCGI
+
 ## config virtual apache --> /etc/apache2/sites-enabled/000-default.conf
-## config httpd  --> /etc/httpd/conf/httpd.conf
-## config enable .htaccess  --> /etc/httpd/conf/httpd.conf
-## config hide os_version and php_version
-## config add custom header
 ## config virtualhost
-## config mpm_event
-## config FPM/FastCGI
-
-
-##############################################
-# tomcat install
-##############################################
-RUN yum install -y java-1.8.0-openjdk.x86_64
-
-RUN groupadd tomcat
-
-RUN yum install -y tomcat
-RUN echo 'JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"' >> /usr/share/tomcat/conf/tomcat.conf
-
-RUN yum install -y haveged
-##RUN systemctl start tomcat.service
-##RUN firewall-cmd --zone=public --permanent --add-port=8080/tcp
-##RUN firewall-cmd --reload
-## or
-##RUN systemctl restart firewalld.service
-##RUN tomcat --version
 
 
 ##############################################
@@ -159,7 +141,6 @@ RUN export PHP_DTRACE=yes
 
 ###SHELL [ "/usr/bin/scl", "enable", "devtoolset-7", "rh-python36" ]
 ###RUN echo "instantclient,/usr/lib/oracle/19.5/client64/lib/" | pecl install oci8
-
 ###RUN touch /usr/lib/oracle/19.5/client64/network/admin/tnsnames.ora
 
 RUN echo "ORACLE_HOME=/usr/lib/oracle/19.5/client64" >> /root/.bash_profile
@@ -197,13 +178,6 @@ RUN wkhtmltopdf -V
 RUN wkhtmltoimage -V
 RUN wkhtmltopdf https://google.com /tmp/output_pdf_file_name.pdf
 RUN wkhtmltoimage https://google.com /tmp/output_image_file_name.jpg
-
-
-##############################################
-# find(locate) file
-##############################################
-RUN yum install -y mlocate
-RUN updatedb
 
 
 ##############################################
@@ -249,6 +223,29 @@ RUN yum install -y mod_security
 
 
 ##############################################
+# tomcat install
+##############################################
+RUN yum install -y java-1.8.0-openjdk-devel
+
+RUN useradd -m -U -d /opt/tomcat -s /bin/false tomcat
+ADD tomcat/apache-tomcat-9.0.27.tar.gz /tmp/
+#RUN tar -xf /tmp/apache-tomcat-9.0.27.tar.gz
+RUN mv /tmp/apache-tomcat-9.0.27 /opt/tomcat/
+RUN ln -s /opt/tomcat/apache-tomcat-9.0.27 /opt/tomcat/latest
+RUN chown -R tomcat: /opt/tomcat
+RUN sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
+
+COPY tomcat/tomcat.service /etc/systemd/system/tomcat.service
+RUN /opt/tomcat/latest/bin/startup.sh
+
+#RUN tomcat version 
+     # or 
+     # curl http://localhost:8080
+##RUN firewall-cmd --zone=public --permanent --add-port=8080/tcp
+##RUN firewall-cmd --reload
+
+
+##############################################
 # apache enable FPM/FastCGI
 ##############################################
 RUN yum install -y mod_ssl
@@ -277,6 +274,13 @@ COPY supervisord/supervisord.conf /etc/supervisord.conf
 
 # SUPERVISOR - laravel-queue.ini
 COPY supervisord/ini/laravel-queue.ini /etc/supervisord.d/laravel-queue.ini
+
+
+##############################################
+# find(locate) file
+##############################################
+RUN yum install -y mlocate
+RUN updatedb
 
 
 ##############################################

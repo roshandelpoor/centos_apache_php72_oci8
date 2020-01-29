@@ -20,9 +20,9 @@ services:
 
 
       # CODE - TOMCAT DYNAMIC CONFIG
-      - ./Tomcat Project/:/var/lib/tomcat/webapps/
+      #- ./Tomcat Project/:/var/lib/tomcat/webapps/
       # OR
-      #- ./Tomcat Project/:/opt/tomcat/webapps/
+      - ./Tomcat Project/webapps/:/opt/tomcat/latest/webapps/
 
     tty: true
 

@@ -15,4 +15,4 @@ MAILTO=root
 
 05 4 * * * root /usr/sbin/aide --check
 
-* * * * * root  /usr/bin/php /var/www/html/sabzpardaz/artisan schedule:run >> /dev/null 2>&1
+* * * * * root  /usr/bin/php /var/www/html/artisan schedule:run >> /dev/null 2>&1

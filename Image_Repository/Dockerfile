@@ -236,13 +236,17 @@ RUN chown -R tomcat: /opt/tomcat
 RUN sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
 
 COPY tomcat/tomcat.service /etc/systemd/system/tomcat.service
-RUN /opt/tomcat/latest/bin/startup.sh
 
+RUN /opt/tomcat/latest/bin/startup.sh
 #RUN tomcat version 
      # or 
      # curl http://localhost:8080
 ##RUN firewall-cmd --zone=public --permanent --add-port=8080/tcp
 ##RUN firewall-cmd --reload
+
+
+# Copy file WebSite in TOMCAT
+COPY tomcat/copy-billUtil.war-to-opt_tomcat_latest_webapps /opt/tomcat/latest/webapps/
 
 
 ##############################################
@@ -252,9 +256,6 @@ RUN yum install -y mod_ssl
 
 # CONFIG - DNS DYNAMIC RECORD
 COPY dns/resolv.conf /etc/resolv.conf
-
-# CONFIG - TOMCAT DYNAMIC CONFIG
-#- ./docker/web/php72/Image_Repository/conf/apache:/etc/httpd/conf/
 
 # CONFIG - php.ini DYNAMIC CONFIG
 COPY conf/php/php.ini /etc/php.ini

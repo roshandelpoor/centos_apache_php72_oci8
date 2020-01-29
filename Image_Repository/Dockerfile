@@ -197,7 +197,7 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 ##############################################
 # install sshd
 ##############################################
-##RUN yum install -y openssh-server && sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+##RUN yum install -y openssh-server openssh-clients && sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
 # select root pasword
 ##RUN echo "root:pasword" | chpasswd && echo "root   ALL=(ALL)       ALL" >> /etc/sudoers
 ##RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key

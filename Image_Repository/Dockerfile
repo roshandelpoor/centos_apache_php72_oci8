@@ -75,7 +75,7 @@ RUN curl -sS https://getcomposer.org/installer | php --  --install-dir=/usr/bin 
 
 
 ##############################################
-# cron job
+# supervisor and queue in laravel
 ##############################################
 RUN yum install supervisor -y
 
@@ -270,10 +270,13 @@ COPY conf/apache/config_httpd_and_enable_htaccess/httpd.conf /etc/httpd/conf/htt
 
 # CONFIG - SUPERVISOR DYNAMIC
 COPY bootstrap /
-COPY supervisord/supervisord.conf /etc/supervisord.conf
+COPY supervisord_and_queue/supervisord.conf /etc/supervisord.conf
 
 # SUPERVISOR - laravel-queue.ini
-COPY supervisord/ini/laravel-queue.ini /etc/supervisord.d/laravel-queue.ini
+COPY supervisord_and_queue/ini/laravel-queue.ini /etc/supervisord.d/laravel-queue.ini
+
+# CronJab linux
+COPY crontab_and_cronjob/crontab /etc/crontab
 
 
 ##############################################

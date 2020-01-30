@@ -12,9 +12,9 @@ services:
     build:
       context: ./Image_Repository
     ports:
-      - 9020:80    # apache server
-      - 9080:8080  # tomcat server
-      - 1215:1215  # swoole server
+      - 9020:80    #apache server
+      - 9080:8080  #tomcat server
+      #- 1215:1215  #swoole server
     volumes:
       # CODE - PHP CODE VOLUMES
       - ./PHP Project/:/var/www/html/

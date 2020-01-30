@@ -288,6 +288,13 @@ RUN updatedb
 
 
 ##############################################
+# install libmcrypt-dev and php extention mcrypt
+##############################################
+#RUN yum install -y libmcrypt-dev
+#RUN docker-php-ext-install -j$(nproc) mcrypt
+
+
+##############################################
 # Directory
 ##############################################
 WORKDIR /var/www/html

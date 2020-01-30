@@ -288,8 +288,9 @@ RUN updatedb
 
 
 ##############################################
-# install php extention bcmatch
+# install php extention bcmath
 ##############################################
+#RUN yum search bcmath
 RUN yum install -y php72-php-bcmath.x86_64
 RUN cp /etc/opt/remi/php72/php.d/20-bcmath.ini /etc/php.d/
 RUN cp /opt/remi/php72/root/usr/lib64/php/modules/bcmath.so /usr/lib64/php/modules/

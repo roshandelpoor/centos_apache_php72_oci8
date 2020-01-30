@@ -288,10 +288,11 @@ RUN updatedb
 
 
 ##############################################
-# install libmcrypt-dev and php extention mcrypt
+# install php extention bcmatch
 ##############################################
-#RUN yum install -y libmcrypt-dev
-#RUN docker-php-ext-install -j$(nproc) mcrypt
+RUN yum install -y php72-php-bcmath.x86_64
+RUN cp /etc/opt/remi/php72/php.d/20-bcmath.ini /etc/php.d/
+RUN cp /opt/remi/php72/root/usr/lib64/php/modules/bcmath.so /usr/lib64/php/modules/
 
 
 ##############################################
